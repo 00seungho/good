@@ -2,6 +2,7 @@ const { url } = require('inspector');
 const CommonService = require('../../services/v1/common-service');
 const RegisterService = require('../../services/v1/register-service');
 const axios = require('axios');
+const { queryTarget } = req.query;
 
 
 exports.Con_get_bus = async (req, res, next) => {
@@ -35,7 +36,8 @@ exports.Con_get_bus = async (req, res, next) => {
 exports.Con_sub_master = async (req, res, next) => {
     try {
 
-        
+        const { startIndex, endIndex } = req.query;
+
         var url = `http://openapi.seoul.go.kr:8088/74776a5341746d6439394a57735854/json/SeoulMetroFaciInfo/${startIndex}/${endIndex}/`
         
         const axios = require('axios');
