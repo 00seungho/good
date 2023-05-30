@@ -2,7 +2,7 @@ const { url } = require('inspector');
 const CommonService = require('../../services/v1/common-service');
 const RegisterService = require('../../services/v1/register-service');
 
-exports.Con_getBusMap = async (req, res, next) => {
+exports.Con_get_bus = async (req, res, next) => {
     try {
         
         const axios = require('axios');
@@ -32,7 +32,7 @@ exports.Con_getBusMap = async (req, res, next) => {
     }
 }
 
-exports. Con_get_bus = async (req, res, next) => {
+exports.Con_sub_master = async (req, res, next) => {
     try {
         var startIndex=1;
         var endIndex=999;
