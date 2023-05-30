@@ -36,7 +36,8 @@ app.use(cors({
     origin: [
         'http://localhost:3000', 
 	    'http://127.0.0.1:3000',
-        'https://highfive.aikopo.net'
+        'https://highfive.aikopo.net',
+        
     ],// 허가된 url만 받음
     credentials: true,
 }));

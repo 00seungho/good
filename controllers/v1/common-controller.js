@@ -2,25 +2,24 @@ const { url } = require('inspector');
 const CommonService = require('../../services/v1/common-service');
 const RegisterService = require('../../services/v1/register-service');
 const axios = require('axios');
-const { queryTarget } = req.query;
 
 
 exports.Con_get_bus = async (req, res, next) => {
     try {
-        
+        res.header("Access-Control-Allow-Origin", "*");
+        const { stid, serverkey } = req.query;
         let config = {
           method: 'get',
           maxBodyLength: Infinity,
-          url: 'http://openapi.seoul.go.kr:8088/74776a5341746d6439394a57735854/json/subwayStationMaster/1/999/',
+          url: `http://ws.bus.go.kr/api/rest/arrive/getLowArrInfoByStId?serviceKey=${serverkey}stld&${stid}`,
           headers: {}
         };
         
         axios.request(config)
         .then((response) => {
-          console.log(JSON.stringify(response.data));
-            return res.status(200).json({
-                good:response.data
-        })
+            return res.status(200).xml(
+                response.data
+        )
         })
         .catch((error) => {
           console.log(error);
@@ -35,6 +34,7 @@ exports.Con_get_bus = async (req, res, next) => {
 
 exports.Con_sub_master = async (req, res, next) => {
     try {
+        res.header("Access-Control-Allow-Origin", "*");
 
         const { startIndex, endIndex } = req.query;
 
@@ -50,8 +50,10 @@ exports.Con_sub_master = async (req, res, next) => {
         
         axios.request(config)
         .then((response) => {
- 
-
+            console.log('resData', response.data);
+            return res.status(200).json(
+            response.data
+            )
           })
         .catch((error) => {
           console.log(error);
@@ -66,7 +68,8 @@ exports.Con_sub_master = async (req, res, next) => {
 
 exports. Con_get_sub_ev = async (req, res, next) => {
     try {
-        
+        res.header("Access-Control-Allow-Origin", "*");
+
 
         let config = {
           method: 'get',
@@ -78,9 +81,9 @@ exports. Con_get_sub_ev = async (req, res, next) => {
         axios.request(config)
         .then((response) => {
           console.log(JSON.stringify(response.data));
-            return res.status(200).json({
-                good:response.data
-        })
+            return res.status(200).json(
+               response.data
+        )
         })
         .catch((error) => {
           console.log(error);
